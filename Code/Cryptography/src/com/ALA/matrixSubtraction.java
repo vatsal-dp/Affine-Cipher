@@ -10,7 +10,7 @@ public class matrixSubtraction {
         for (int i = 0; i < matrix1.length; i++) {
             for (int j = 0; j < matrix1[0].length; j++) {
                 subtractionMatrix[i][j] = matrix2[i][j] - matrix1[i][j];
-                subtractionMatrix[i][j] %= 29;
+                subtractionMatrix[i][j] %= 97;
             }
         }
         return subtractionMatrix;

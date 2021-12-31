@@ -9,7 +9,7 @@ public class matrixMultiplication {
                 C[i][j] = 0;
                 for (int k = 0; k < P.length; k++) {
                     C[i][j] += A[i][k] * P[k][j];
-                    C[i][j] %= 29;
+                    C[i][j] %= 97;
                 }
             }
         }
