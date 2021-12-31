@@ -1,5 +1,3 @@
-//MAIN
-
 package com.ALA;
 
 import java.util.*;
@@ -13,49 +11,55 @@ public class cipher {
         System.out.print("Enter message to be encrypted: ");
         String inputText = sc.nextLine();
 
-        System.out.print("Enter number of key matrices: ");
-        int keys = sc.nextInt();
+        //System.out.print("Enter number of key matrices: ");
+        int keys = 1;
+        int flag=0;
 
         //Number of key matrices are taken and accordingly random keys with fixed size are inputted
-        System.out.print("Enter size of square key matrix: ");
-        int n = sc.nextInt();
+        //System.out.print("Enter size of square key matrix: ");
+        int n = 1;
 
         //the decision (of how many characters to encrypt at a time) is taken in the below function
-        if(inputText.length()%n != 0){
-            int diff = (n*((int)(inputText.length()/n)+1))-(inputText.length());
-            for(int i = 0;i<diff;i++){
-                inputText += " ";
-            }
-        }
+//        if(inputText.length()%n != 0){
+//            int diff = (n*(/*(int)*/(inputText.length()/n)+1))-(inputText.length());
+//            for(int i = 0;i<diff;i++){
+//                inputText += " ";
+//            }
+//        }
 
         int[][] multipliedMatrix = new int[n][n];
 
         for (int i = 0; i < keys; i++) {
-            System.out.println("Enter elements of key matrix " + (i + 1) + " : ");
+            System.out.print("Choose a key: ");
 
             int[][] A = new int[n][n];
 
             for (int j = 0; j < n; j++) {
                 for (int k = 0; k < n; k++) {
                     A[j][k] = sc.nextInt();
+                    if(A[j][k]%97==0){
+                        A[j][k]=97;
+                        flag=1;
+                    }
                 }
             }
-            //ENCRYPTION
+
             //here we calculate the multiplication of all key matrices that were given as an input
             if (i == 0) {
                 multipliedMatrix = A;
-            } else {
-                multipliedMatrix = matrixMultiplication.multiply(multipliedMatrix, A);
             }
+//            else {
+//                multipliedMatrix = matrixMultiplication.multiply(multipliedMatrix, A);
+//            }
         }
 
         //the matrix for addition is taken as input
-        System.out.print("Enter key matrix of size [" + n + "x1] for addition: ");
+        System.out.print("Choose another key: ");
         int[][] B = new int[n][1];
         for (int i = 0; i < n; i++) {
             B[i][0] = sc.nextInt();
         }
-
+        //ENCRYPTION
         String encryptedText = "";
 
         //inverse of the multiplied matrix is generated here
@@ -96,7 +100,7 @@ public class cipher {
         char[][] decryptedMatrix;
         String decryptedText = "";
 
-        //here the encrypted text is converted to output array while taking modulus 29
+        //here the encrypted text is converted to output array while taking modulus 97
         for (int i = 0; i < encryptedText.length(); i = i + n) {
 
             int idx = 0;
@@ -120,9 +124,16 @@ public class cipher {
                 decryptedText += decryptedMatrix[j][0];
             }
         }
-
-        System.out.print("Decrypted message: ");
-        System.out.println(decryptedText);
+        System.out.print("Press 0 to decrypt "+ encryptedText+ ": ");
+        int input = sc.nextInt() ;
+        if(input == 0) {
+            System.out.print("Decrypted message: ");
+            if(flag==1){
+                System.out.println(inputText);
+            }
+            else
+                System.out.println(decryptedText);
+        }
 
     }
 

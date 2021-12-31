@@ -86,7 +86,7 @@ public class matrixInversion {
         int detA = determinant(A,A.length);
 
         while(detA<0){
-            detA += 29;
+            detA += 97;
         }
 
         if(detA==0){
@@ -94,7 +94,7 @@ public class matrixInversion {
             System.exit(1);
         }
 
-        detA = modInverse(detA,29);
+        detA = modInverse(detA,97);
         int[][] adj = new int[N][N]; // To store adjoint of A[][]
 
 
@@ -104,7 +104,7 @@ public class matrixInversion {
             for (int j = 0; j < adj[0].length; j++) {
                 adj[i][j]*=detA;
                 while(adj[i][j]<0){
-                    adj[i][j]+=29;
+                    adj[i][j]+=97;
                 }
             }
         }
