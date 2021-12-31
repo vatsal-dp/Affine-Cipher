@@ -12,7 +12,7 @@ public class matrixAddition {
             for (int j = 0; j < matrix1[0].length; j++) {
                 additionMatrix[i][j] = matrix2[i][j] + matrix1[i][j];
 
-                additionMatrix[i][j] %= 29;
+                additionMatrix[i][j] %= 97;
             }
         }
         return additionMatrix;
